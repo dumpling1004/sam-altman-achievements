@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sam Altman - Other Ventures & Investments</title>
+    <style>
+        :root {
+            --primary-color: #333;
+            --secondary-color: #555;
+            --accent-color: #0366d6;
+            --background-color: #f5f5f5;
+            --card-color: #fff;
+            --border-color: #ddd;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--primary-color);
+            background-color: var(--background-color);
+        }
+        
+        header {
+            background-color: var(--card-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 5px;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 500;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent-color);
+            background-color: rgba(3, 102, 214, 0.1);
+        }
+        
+        .nav-links a.active {
+            color: var(--accent-color);
+            font-weight: 600;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-color);
+        }
+        
+        main {
+            padding: 40px 0;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+        
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .hero-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .overview {
+            background-color: var(--card-color);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .overview h2 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .overview p {
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .investments {
+            background-color: var(--card-color);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .investments h2 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .investment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .investment-card {
+            background-color: var(--card-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .investment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .investment-card h3 {
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .investment-card p {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+        
+        .chart-container {
+            margin: 40px 0;
+            background-color: var(--card-color);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .chart-container h2 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        canvas {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            display: block;
+        }
+        
+        .investment-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .investment-table th, .investment-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .investment-table th {
+            background-color: rgba(3, 102, 214, 0.1);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .investment-table tr:hover {
+            background-color: rgba(0,0,0,0.02);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            background-color: #0256b3;
+        }
+        
+        footer {
+            background-color: var(--card-color);
+            padding: 20px 0;
+            text-align: center;
+            color: var(--secondary-color);
+            border-top: 1px solid var(--border-color);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                background-color: var(--card-color);
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                padding: 10px 0;
+            }
+            
+            .nav-links.show {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 20px;
+            }
+            
+            .menu-btn {
+                display: block;
+            }
+            
+            .investment-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .investment-table {
+                font-size: 0.9rem;
+            }
+            
+            .investment-table th, .investment-table td {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Sam Altman</a>
+                <button class="menu-btn">☰</button>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Early Life & Education</a></li>
+                    <li><a href="#">Y Combinator Era</a></li>
+                    <li><a href="#">OpenAI & AI Leadership</a></li>
+                    <li><a href="#" class="active">Other Ventures & Investments</a></li>
+                    <li><a href="#">Achievements & Impact</a></li>
+                    <li><a href="#">Future Outlook/Vision</a></li>
+                    <li><a href="#">Resources/Links</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Other Ventures & Investments</h1>
+        
+        <section class="hero">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Sam_Altman_2014.jpg" alt="Sam Altman" class="hero-image">
+        </section>
+        
+        <section class="overview">
+            <h2>Investment Portfolio Overview</h2>
+            <p>Beyond his leadership roles at Y Combinator and OpenAI, Sam Altman has built an impressive investment portfolio that spans multiple industries and technologies. As of June 2024, his investments include stakes in over 400 companies with a combined valuation of approximately $2.8 billion.</p>
+            <p>Altman's investment strategy demonstrates his forward-thinking approach and commitment to technologies that can transform industries and address global challenges. His portfolio reflects his interests in artificial intelligence, clean energy, biotechnology, transportation, and consumer technology.</p>
+        </section>
+        
+        <section class="chart-container">
+            <h2>Investment Distribution</h2>
+            <canvas id="investmentChart"></canvas>
+            <button class="btn" id="toggleChartBtn">Toggle Chart View</button>
+        </section>
+        
+        <section class="investments">
+            <h2>Notable Investments</h2>
+            <p>Sam Altman has invested in some of the most successful and innovative companies of the past decade. Here are some of his most significant investments:</p>
+            
+            <div class="table-container">
+                <table class="investment-table">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Sector</th>
+                            <th>Investment Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Airbnb</td>
+                            <td>Hospitality</td>
+                            <td>Early investor</td>
+                        </tr>
+                        <tr>
+                            <td>Stripe</td>
+                            <td>Fintech</td>
+                            <td>Early investor</td>
+                        </tr>
+                        <tr>
+                            <td>Reddit</td>
+                            <td>Social Media</td>
+                            <td>Early investor</td>
+                        </tr>
+                        <tr>
+                            <td>Retro Biosciences</td>
+                            <td>Biotechnology</td>
+                            <td>$180 million investment</td>
+                        </tr>
+                        <tr>
+                            <td>Helion Energy</td>
+                            <td>Clean Energy</td>
+                            <td>$375 million commitment, Chairman</td>
+                        </tr>
+                        <tr>
+                            <td>Oklo Inc.</td>
+                            <td>Nuclear Energy</td>
+                            <td>Significant investor</td>
+                        </tr>
+                        <tr>
+                            <td>Humane</td>
+                            <td>Consumer Tech</td>
+                            <td>Early investor</td>
+                        </tr>
+                        <tr>
+                            <td>Boom Technology</td>
+                            <td>Aviation</td>
+                            <td>Early investor</td>
+                        </tr>
+                        <tr>
+                            <td>Cruise</td>
+                            <td>Autonomous Vehicles</td>
+                            <td>Early investor</td>
+                        </tr>
+                        <tr>
+                            <td>Exowatt</td>
+                            <td>Clean Energy</td>
+                            <td>Significant investor</td>
+                        </tr>
+                        <tr>
+                            <td>Coco Robotics</td>
+                            <td>Robotics</td>
+                            <td>Early investor</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h2 style="margin-top: 40px;">Featured Investments</h2>
+            <div class="investment-grid">
+                <div class="investment-card">
+                    <h3>Helion Energy</h3>
+                    <p>Sam Altman committed $375 million to Helion Energy and serves as the company's chairman. Helion is working on developing fusion energy technology, which could provide clean, abundant, and affordable electricity.</p>
+                </div>
+                
+                <div class="investment-card">
+                    <h3>Retro Biosciences</h3>
+                    <p>With a $180 million investment, Altman is backing Retro Biosciences' mission to extend human healthspan by a decade. The company focuses on cellular reprogramming, autophagy, and plasma-inspired therapeutics.</p>
+                </div>
+                
+                <div class="investment-card">
+                    <h3>Reddit</h3>
+                    <p>As an early investor in Reddit, Altman has supported one of the internet's most influential community platforms. He also briefly served as CEO during a transitional period for the company.</p>
+                </div>
+                
+                <div class="investment-card">
+                    <h3>Stripe</h3>
+                    <p>Altman was an early investor in Stripe, which has become one of the world's most valuable fintech companies, providing payment processing infrastructure for internet businesses.</p>
+                </div>
+                
+                <div class="investment-card">
+                    <h3>Oklo Inc.</h3>
+                    <p>Investing in advanced nuclear technology, Altman has backed Oklo's development of small nuclear reactors that could provide clean, reliable energy with minimal waste.</p>
+                </div>
+                
+                <div class="investment-card">
+                    <h3>Boom Technology</h3>
+                    <p>Altman has invested in Boom, which is developing supersonic commercial aircraft to make high-speed travel accessible, economical, and sustainable.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Sam Altman Profile | This is an informational website</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+        });
+        
+        // Investment chart
+        const ctx = document.getElementById('investmentChart').getContext('2d');
+        let chartType = 'pie';
+        let myChart;
+        
+        const chartData = {
+            labels: ['AI & Tech', 'Clean Energy', 'Biotechnology', 'Transportation', 'Consumer Tech', 'Other'],
+            datasets: [{
+                data: [40, 25, 15, 10, 5, 5],
+                backgroundColor: [
+                    '#0366d6',
+                    '#2ea44f',
+                    '#d73a49',
+                    '#f6c23e',
+                    '#6f42c1',
+                    '#6c757d'
+                ],
+                borderWidth: 1
+            }]
+        };
+        
+        function createChart(type) {
+            if (myChart) {
+                myChart.destroy();
+            }
+            
+            myChart = new Chart(ctx, {
+                type: type,
+                data: chartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Estimated Investment Distribution by Sector (%)',
+                            font: {
+                                size: 16
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Toggle chart type
+        document.getElementById('toggleChartBtn').addEventListener('click', () => {
+            chartType = chartType === 'pie' ? 'bar' : 'pie';
+            createChart(chartType);
+        });
+        
+        // Chart.js minimal implementation for the demo
+        class Chart {
+            constructor(ctx, config) {
+                this.ctx = ctx;
+                this.config = config;
+                this.render();
+            }
+            
+            render() {
+                const canvas = this.ctx.canvas;
+                const ctx = this.ctx;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                if (this.config.type === 'pie') {
+                    this.drawPie();
+                } else if (this.config.type === 'bar') {
+                    this.drawBar();
+                }
+            }
+            
+            drawPie() {
+                const canvas = this.ctx.canvas;
+                const ctx = this.ctx;
+                const data = this.config.data.datasets[0].data;
+                const colors = this.config.data.datasets[0].backgroundColor;
+                const labels = this.config.data.labels;
+                
+                const total = data.reduce((a, b) => a + b, 0);
+                let currentAngle = 0;
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                const radius = Math.min(centerX, centerY) - 10;
+                
+                // Draw pie segments
+                for (let i = 0; i < data.length; i++) {
+                    const sliceAngle = 2 * Math.PI * data[i] / total;
+                    
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
+                    ctx.lineTo(centerX, centerY);
+                    ctx.fillStyle = colors[i];
+                    ctx.fill();
+                    
+                    currentAngle += sliceAngle;
+                }
+                
+                // Draw legend
+                const legendY = canvas.height - 80;
+                ctx.font = '12px Arial';
+                
+                for (let i = 0; i < labels.length; i++) {
+                    const x = 20 + (i % 3) * (canvas.width / 3);
+                    const y = legendY + Math.floor(i / 3) * 20;
+                    
+                    ctx.fillStyle = colors[i];
+                    ctx.fillRect(x, y, 10, 10);
+                    
+                    ctx.fillStyle = '#333';
+                    ctx.fillText(`${labels[i]}: ${data[i]}%`, x + 15, y + 9);
+                }
+            }
+            
+            drawBar() {
+                const canvas = this.ctx.canvas;
+                const ctx = this.ctx;
+                const data = this.config.data.datasets[0].data;
+                const colors = this.config.data.datasets[0].backgroundColor;
+                const labels = this.config.data.labels;
+                
+                const barWidth = (canvas.width - 60) / data.length;
+                const maxValue = Math.max(...data);
+                const scale = (canvas.height - 100) / maxValue;
+                
+                // Draw bars
+                for (let i = 0; i < data.length; i++) {
+                    const barHeight = data[i] * scale;
+                    const x = 30 + i * barWidth;
+                    const y = canvas.height - 60 - barHeight;
+                    
+                    ctx.fillStyle = colors[i];
+                    ctx.fillRect(x, y, barWidth - 10, barHeight);
+                    
+                    ctx.fillStyle = '#333';
+                    ctx.font = '12px Arial';
+                    ctx.fillText(labels[i], x, canvas.height - 40);
+                    ctx.fillText(`${data[i]}%`, x, y - 5);
+                }
+            }
+            
+            destroy() {
+                const canvas = this.ctx.canvas;
+                this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        }
+        
+        // Initialize chart on page load
+        window.addEventListener('load', () => {
+            // Set canvas dimensions
+            const canvas = document.getElementById('investmentChart');
+            canvas.width = canvas.parentElement.offsetWidth - 60;
+            canvas.height = 400;
+            
+            createChart(chartType);
+        });
+        
+        // Responsive canvas
+        window.addEventListener('resize', () => {
+            const canvas = document.getElementById('investmentChart');
+            canvas.width = canvas.parentElement.offsetWidth - 60;
+            createChart(chartType);
+        });
+    </script>
+</body>
+</html>
